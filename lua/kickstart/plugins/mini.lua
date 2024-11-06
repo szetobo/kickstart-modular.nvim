@@ -17,23 +17,44 @@ return {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      require('mini.align').setup()
+      require('mini.animate').setup()
+      require('mini.bracketed').setup()
+      require('mini.files').setup {
+        windows = {
+          preview = true,
+          width_focus = 40,
+          width_preview = 40,
+        },
+      }
+      require('mini.indentscope').setup()
+      require('mini.jump').setup()
+      require('mini.jump2d').setup()
+      require('mini.splitjoin').setup()
+      require('mini.trailspace').setup()
 
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      require('mini.misc').setup()
+      MiniMisc.setup_restore_cursor()
+
+      -- -- Simple and easy statusline.
+      -- --  You could remove this setup call if you don't like it,
+      -- --  and try some other statusline plugin
+      -- local statusline = require 'mini.statusline'
+      -- -- set use_icons to true if you have a Nerd Font
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
+      --
+      -- -- You can configure sections in the statusline by overriding their
+      -- -- default behavior. For example, here we set the section for
+      -- -- cursor location to LINE:COLUMN
+      -- ---@diagnostic disable-next-line: duplicate-set-field
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+
+      vim.keymap.set('n', '-', require('mini.files').open, { desc = 'Open mini.files' })
     end,
   },
 }
